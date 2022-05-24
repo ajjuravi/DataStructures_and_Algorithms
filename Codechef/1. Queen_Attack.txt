@@ -1,0 +1,71 @@
+https://www.codechef.com/MAY221D/problems/QUEENATTACK/
+
+// Problem
+The Attack of Queen Problem Code: QUEENATTACK
+
+Chef has started developing interest in playing chess, and was learning how the Queen moves.
+
+Chef has an empty N×N chessboard. He places a Queen at (X,Y) and wonders - What are the number of cells that are under attack by the Queen?
+
+Notes:
+
+The top-left cell is (1,1), the top-right cell is (1,N), the bottom-left cell is (N,1) and the bottom-right cell is (N,N).
+The Queen can be moved any number of unoccupied cells in a straight line vertically, horizontally, or diagonally.
+The cell on which the Queen is present, is not said to be under attack by the Queen.
+Input Format
+The first line contains a single integer T - the number of test cases. Then the test cases follow.
+The first and only line of each test case contains three integers N, X and Y, as described in the problem statement.
+Output Format
+For each test case, output in a single line, the total number of cells that are under attack by the Queen.
+
+Constraints
+1≤T≤104
+1≤N≤106
+1≤X,Y≤N
+Sample Input 1 
+5
+1 1 1
+3 2 2
+3 2 1
+2 2 2
+150 62 41
+Sample Output 1 
+0
+8
+6
+3
+527
+Explanation
+Test case 1: The only cell on the board is (1,1). Since Queen stands on this cell, it is not under attack.
+
+Test case 2: The Queen can attack the following cells: {(1,1),(1,2),(1,3),(2,1),(2,3),(3,1),(3,2),(3,3)}.
+
+Test case 3: The Queen can attack the following cells: {(1,1),(1,2),(2,2),(2,3),(3,1),(3,2)}.
+
+Test case 4: The Queen can attack the following cells: {(1,1),(1,2),(2,1)}.
+
+// Solution
+#include <iostream>
+using namespace std;
+int main()
+{
+int T=0, N=0, X=0, Y=0;
+int hori_verti = 0, diagonal = 0, result = 0;
+int topright = 0, topleft = 0, bottomright = 0, bottomleft = 0;
+cin >> T;
+while(T--)
+{
+	cin >> N >> X >> Y;
+	hori_verti = (N * 2) - 2; 	//horizontal, vertical
+	
+	topright = min(X-1,Y-1);
+	topleft = min(X-1,N-Y);
+	bottomright = min(N-X,N-Y);
+	bottomleft = min(N-X,Y-1);
+	diagonal = topright + topleft + bottomright + bottomleft;
+	
+	result = hori_verti + diagonal;
+	cout << result << endl;
+}
+return 0;
+}
